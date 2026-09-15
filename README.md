@@ -1,8 +1,8 @@
 <div align="center">
 
-# Course Name
+# Probability and Statistics
 
-课程中文名 · `COURSE0000` · SJTU
+概率统计 · `MATH1207` · SJTU
 
 **Author Closure**
 
@@ -14,7 +14,7 @@
 
 ---
 
-Course notes for **Course Name（课程中文名, `COURSE0000`）** at **SJTU**,
+Course notes for **Probability and Statistics（概率统计, `MATH1207`）** at **SJTU**,
 typeset in [Typst](https://typst.app/) and continuously built into a PDF by CI.
 
 ## Download
@@ -26,7 +26,7 @@ The latest PDF is built automatically on every push and published to
 
 | File | Description |
 |------|-------------|
-| [`notebook.typ`](notebook.typ) | Source of the notes, written in Typst |
+| [`ProbabilityAndStatistics-Notebook.typ`](ProbabilityAndStatistics-Notebook.typ) | Source of the notes, written in Typst |
 | [`template.typ`](template.typ) | Styling template (imported by the notes, not compiled on its own) |
 | [`course.toml`](course.toml) | Course metadata — the single source of truth for this README and the release workflow |
 | `*.pdf` | Compiled output — built by CI, get it from [Releases](https://github.com/ClosureScope/ProbabilityAndStatistics/releases/latest) |
@@ -34,7 +34,7 @@ The latest PDF is built automatically on every push and published to
 ## Building locally
 
 ```bash
-typst compile notebook.typ
+typst compile ProbabilityAndStatistics-Notebook.typ
 ```
 
 ---
