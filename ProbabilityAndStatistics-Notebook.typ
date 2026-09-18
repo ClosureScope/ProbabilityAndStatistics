@@ -120,4 +120,55 @@
     &= sum_(k=1)^n (-1)^(k-1) sum_(1 <= i_1 < dots < i_k <= n) P(A_(i_1) inter dots inter A_(i_k))
   $
 ]
+#definition[联合界][
+
+  给定事件$A_1, A_2, dots, A_k subset.eq Omega$，那么$ Pr(A_1 union A_2 union dots union A_k) <= Pr(A_1) + Pr(A_2) + dots + Pr(A_k) $
+]
+
 == 条件概率
+=== 条件概率
+#definition[条件概率][
+
+  设$A, B$为两事件，$Pr(B)>0$，则事件$B$发生的条件下事件$A$发生的条件概率记为$Pr(A | B)$
+  $ Pr(A | B) = Pr(A inter B) / Pr(B) $
+]
+
+#proposition[条件概率的性质][
+  + 非负性：$Pr(B | A) >= 0$
+  + 规范性：$Pr(Omega | A) = 1$
+  + 可列可加性：$B_1, B_2, dots$为两两互斥事件，$Pr(union.big_(i=1)^infinity B_i | A) = sum_(i=1)^infinity Pr(B_i | A)$
+  + $Pr(overline(B) | A)+Pr(B | A) = 1$
+  + $Pr(B union C | A) = Pr(B | A) + Pr(C | A) - Pr(B C | A)$
+
+]
+
+=== 乘法公式
+#theorem[乘法公式][
+  $ Pr(A B) = Pr(A) Pr(B | A) = Pr(B) Pr(A | B) $
+]
+
+=== 全概率公式
+#definition[完备事件组][
+
+  若$B_1, B_2, dots, B_n$两两互斥，且$Omega = union.big_(i=1)^n B_i$，则称$B_1, B_2, dots, B_n$为完备事件组，或称$B_1, B_2, dots, B_n$为$Omega$的一个划分
+]
+
+#theorem[全概率公式][
+
+  设$B_1, B_2, dots, B_n$为$Omega$的一个划分
+  $ Pr(A) = sum_(i=1)^n Pr(B_i) Pr(A | B_i) $
+]
+
+=== 贝叶斯公式
+#theorem[贝叶斯公式][
+
+  设$B_1, B_2, dots, B_n$为$Omega$的一个划分，且$Pr(B_i) > 0$，则对试验的任一事件$A$（$Pr(A)>0$），有
+  $ Pr(B_i | A) = Pr(A B_i) / Pr(A) = (Pr(B_i) Pr(A | B_i)) / (sum_(i=1)^n Pr(B_i) Pr(A | B_i)) $
+]
+称$Pr(B_i)$为先验概率，是由以往经验得到的，是事件$A$的原因
+
+称$Pr(B_i | A)$为后验概率，是得到了信息$A$发生，再对$A$的原因$B_i$发生的可能性加以修正
+
+
+
+
