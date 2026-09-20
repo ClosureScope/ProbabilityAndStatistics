@@ -169,6 +169,50 @@
 
 称$Pr(B_i | A)$为后验概率，是得到了信息$A$发生，再对$A$的原因$B_i$发生的可能性加以修正
 
+== 随机事件的独立性
+=== 随机事件的独立性
+#definition[独立][
 
+  对任意两事件$A, B$满足$Pr(A B) = Pr(A) Pr(B)$，则称$A$与$B$相互独立]
 
+#proposition[][
+
+  如果四对事件$A, B; A, overline(B); overline(A), B; overline(A), overline(B)$中其中任何一对事件相互独立，则其余三对事件也分别相互独立]
+
+#definition[相互独立][
+
+  三个事件$A, B, C$相互独立是指下面的关系式同时成立
+  $ cases(Pr(A B) = Pr(A) Pr(B), Pr(A C) = Pr(A) Pr(C), Pr(B C) = Pr(B) Pr(C)) $
+  $ Pr(A B C) = Pr(A) Pr(B) Pr(C) $
+]
+
+#definition[两两独立][
+
+  三个事件$A, B, C$两两独立是指下面的关系式成立
+  $ cases(Pr(A B) = Pr(A) Pr(B), Pr(A C) = Pr(A) Pr(C), Pr(B C) = Pr(B) Pr(C)) $
+]
+
+#definition[相互独立][
+
+  $n$个事件$A_1, A_2, dots, A_n$相互独立是指下面的关系式同时成立
+  $
+             Pr(A_i A_j) & = Pr(A_i) Pr(A_j) \
+         Pr(A_i A_j A_k) & = Pr(A_i) Pr(A_j) Pr(A_k) \
+                    dots & = dots \
+    Pr(A_1 A_2 dots A_n) & = Pr(A_1) Pr(A_2) dots Pr(A_n)
+  $
+]
+
+#proposition[][
+
+  若$n$个事件相互独立，任意分成$k$组，同一个事件不能同时属于两个不同的组，则对每组的事件进行和，积，差，对立等运算得到的$k$个事件也相互独立。
+]
+=== 随机事件的条件独立
+#definition[条件独立][
+
+  设$A, B, C$为随机事件，且$Pr(C) > 0$，若
+  $ Pr(A inter B | C) = Pr(A | C) Pr(B | C) $
+  则称$A$与$B$在给定$C$下条件独立，记为
+  $ A perp B | C $
+]
 
