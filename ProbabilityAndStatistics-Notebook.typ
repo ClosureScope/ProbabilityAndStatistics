@@ -216,3 +216,56 @@
   $ A perp B | C $
 ]
 
+= 随机变量及其分布
+== 随机变量及其分布函数
+=== 随机变量的概念
+#definition[随机变量][
+
+  设随机试验$E$的样本空间是$Omega$，若$forall omega in Omega$，按一定的法则，存在一个实数$X(omega)$与之对应，则称$Omega$上的实值函数$X(omega)$为随机变量]
+=== 随机变量的分布函数
+#definition[分布函数][
+
+  设$X$为一随机变量，对于任意实数$x$，称$F(x) = Pr(X <= x)$为$X$的分布函数，也可记作$F_X (x)$]
+
+#proposition[分布函数的性质][
+  + 有界性：$0 <= F(x) <= 1, lim_(x->+infinity) F(x) = 1, lim_(x->-infinity) F(x) = 0$
+  + 单调性：$forall x_1 < x_2, F(x_1) <= F(x_2)$
+  + 右连续性：$forall x, lim_(t->x+) F(t) = F(x)$
+]
+
+== 离散型随机变量及其分布律
+=== 离散型随机变量概率分布的一般概念
+#definition[离散型随机变量][
+
+  若随机变量$X$的可能取值是有限多个或可列无穷多个，称$X$为离散型随机变量]
+#definition[分布律][
+
+  设离散型随机变量$X$的所有可能取值为$X = x_i$，不妨设$x_1 < x_2 < dots$，称
+  $ Pr(X = x_i) = Pr({omega: X(omega) = x_i}) = p_i $
+  为随机变量$X$的分布律，也称作概率密度函数
+]
+#proposition[分布律的性质][
+  + $p_i >= 0$
+  + $sum_(i=1)^infinity p_i = 1$
+]
+#proposition[分布函数与分布律的关系][
+  + $F(x) = Pr(X <= x) = sum_(x_i <= x) Pr(X = x_i)$
+  + 若$x_1 < x_2 < dots$，$Pr(X = x_i) = Pr(x_(i-1) < X <= x_i) = F(x_i) - F(x_(i-1))$
+]
+=== 常见的离散型随机变量
+#definition[0-1分布][
+
+  若离散型随机变量$X$的分布列为
+  $ Pr(X=k) = p^k (1-p)^(1-k), k=0, 1; 0<p<1 $
+  则称$X$服从参数为$p$的0-1分布
+]
+#definition[二项分布][
+
+  在$n$重Bernoulli试验中，设一次试验中事件$A$发生的概率 $Pr(A) = p, 0<p<1$，令$X$表示事件$A$发生的次数，则$X$的分布律为
+  $ Pr(X=k) = C_n^k p^k (1-p)^(n-k) $
+  称$X$服从参数为$(n, p)$的二项分布，记为$B(n,p)$
+]
+#proposition[二项分布中最可能成功次数][
+  - 当$(n+1)p in Z$时，在$k = (n+1)p$与$k=(n+1)p-1$处的概率取得最大值
+  - 当$(n+1)p in.not Z$时，在$k = floor((n+1)p)$处的概率取得最大值
+]
