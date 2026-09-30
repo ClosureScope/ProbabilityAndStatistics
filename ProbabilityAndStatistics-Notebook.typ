@@ -223,10 +223,8 @@
 ]
 
 == 离散型随机变量及其分布律
-=== 离散型随机变量概率分布的一般概念
-#definition[离散型随机变量][
+=== 离散型随机变量的分布律
 
-  随机变量$X$的可能取值是有限多个或可列无穷多个]
 #definition[分布律][
 
   设离散型随机变量$X$的所有可能取值为$X = x_i$，不妨设$x_1 < x_2 < dots$，称
@@ -248,17 +246,91 @@
 ]
 #definition[二项分布][
 
-  在$n$重Bernoulli试验中，设一次试验中事件$A$发生的概率 $Pr(A) = p, 0<p<1$，令$X$表示事件$A$发生的次数，则$X$的分布律为
+  在$n$重伯努利试验中，设一次试验中事件$A$发生的概率 $Pr(A) = p, 0<p<1$，
+
+  令$X$表示事件$A$发生的次数，则$X$的分布律为
   $ Pr(X=k) = C_n^k p^k (1-p)^(n-k) $
   称$X tilde B(n,p)$
 ]
 #proposition[二项分布中最可能成功次数][
-  - 当$(n+1)p in Z$时，在$k = (n+1)p$与$k=(n+1)p-1$处的概率取得最大值
-  - 当$(n+1)p in.not Z$时，在$k = floor((n+1)p)$处的概率取得最大值
+  - 当$(n+1)p in ZZ$时，在$k = (n+1)p$与$k=(n+1)p-1$处的概率取得最大值
+  - 当$(n+1)p in.not ZZ$时，在$k = floor((n+1)p)$处的概率取得最大值
 ]
 
+#definition[几何分布][
 
+  伯努利试验等待首次成功时间为$X$
+  $ Pr(X = k) = p (1 - p)^(k-1), k=1, 2, dots $
+
+]
+
+#proposition[几何分布的无记忆性][
+  $ Pr(X = m + k | X > m) = Pr(X = k) $
+]
+#theorem[无记忆性的离散分布$=>$几何分布][
+
+  若$X$取正整数，且在$X > k$的条件下，$X = k + 1$的概率与$k$无关，那么$X$服从几何分布
+]
+#definition[Pascal 分布 / 负二项分布][
+
+  伯努利试验等待$r$次成功时间为$X$
+  $ Pr(X = k) = C_(k-1)^(r-1) p^r (1-p)^(k-r), k = r, r + 1, dots $
+]
+#theorem[Poisson 定理][
+
+  $lambda > 0$, $lim_(n->infinity) n p_n = lambda$
+  $ lim_(n->infinity) C_n^k p_n^k (1 - p_n)^(n - k) = e^(-lambda) lambda^k / (k!), k = 0, 1, 2, dots $
+]
 #definition[Poisson 分布][
-  设随机变量$X$的所有可能取值为$0, 1, 2, dots$，并且分布列为
+
+  $lambda > 0$表示一段时间内某随机事件发生次数的期望，一段时间内其发生$k$次的概率
   $ Pr(X=k) = e^(- lambda) lambda^k / (k !), k = 0, 1, 2, dots $
+  称$X tilde P(lambda)$
 ]
+#proposition[随机稀疏化][
+
+  设总事件数$X tilde P(lambda)$，每个事件独立地通过成功概率为$p$的伯努利试验，则成功事件数$ Y tilde P(lambda p) $
+]
+== 连续型随机变量及其概率密度
+=== 连续型随机变量的概率密度
+#definition[概率密度函数][
+  设$X$是一随机变量，$F(x)$为分布函数，若存在非负可积函数$f(x)$，使得
+  $ F(x) = integral_(-infinity)^x f(t) d t, - infinity < x < + infinity $
+  则$X$是连续型随机变量，$f(x)$为概率密度函数
+]
+
+#proposition[概率密度函数的性质][
+  + 非负性：$f(x) >= 0$
+  + 规范性：$integral_(-infinity)^(+infinity) f(x) d x = F(+ infinity) = 1$
+  + 若$f(x)$在$x$处连续，$f(x) = F^' (x)$
+  + $Pr(x_0 < X <= x_0 + Delta x) approx f(x_0) Delta x$
+  + $a$是$X$的一个可能取值，$Pr(X = a) = 0$
+  + 对于连续型随机变量$X$
+
+    $Pr(a < X <= b) = Pr(a <= X < b) = Pr(a < X < b) = Pr(a <= X <= b) = integral_a^b f(x) d x$
+]
+
+#note[][
+  + 连续型随机变量的分布函数是连续函数
+  + $f(x)$不唯一，允许在有限或可列个点处的函数值不同
+]
+
+
+=== 常见的连续型随机变量
+#definition[指数分布][
+
+  $lambda > 0$表示一段时间内某随机事件发生次数的期望，任意两事件的时间间隔为$X$
+
+  概率密度函数为
+  $ f(x) = cases(0 quad x<=0, lambda e^(-lambda x) quad x>0) $
+
+  累积分布函数为
+  $ F(x) = cases(0 quad x<0, 1 - e^(- lambda x) quad x >= 0) $
+  称$X tilde E(lambda)$
+
+]
+
+#proposition[指数分布的无记忆性][
+  $ Pr(X > s + t | X > s) = Pr(X > t) $
+]
+
