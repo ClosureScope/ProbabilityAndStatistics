@@ -50,17 +50,10 @@
   对立优先，其次是交，然后是并和差。括号内运算优先。
 ]
 == 随机事件的概率
-#definition[$sigma$域][
-
-  $cal(F)$是事件的集合，记作事件域。如果满足以下条件，$cal(F)$称为$sigma$域
-  - $A in cal(F) => A^c in cal(F)$
-  - $A_i in cal(F) => union.big_(i=1)^infinity A_i in cal(F)$
-  - $emptyset in cal(F)$
-]
 
 #definition[概率][
 
-  设$E$是一个随机试验，$Omega$是样本空间，对于$E$的每个事件$A$赋予一个实数$Pr(A)$，若$Pr(dot)$满足以下公理
+  对于随机试验的每个事件$A$赋予一个实数$Pr(A)$，若$Pr(dot)$满足以下公理
 
   + 非负性：$forall A subset Omega, Pr(A) >= 0$
   + 规范性：$Pr(Omega) = 1$
@@ -70,7 +63,7 @@
 === 频率与概率
 #definition[频率][
 
-  如果事件$A$在$n$次重复试验中发生了$m$次，则称比值$m/n$为在$n$次重复试验中事件$A$的概率，记为
+  如果事件$A$在$n$次重复试验中发生了$m$次，$A$的频率为
   $ f_n (A) = m/n $
 ]
 
@@ -81,7 +74,8 @@
 ]
 
 #definition[统计概率][
-  设随机事件$A$在$n$次重复试验中发生了$m$次。若当$n$很大时，频率$f_n (A) = m/n$稳定在某一数值$p$的附近摆动，且随着试验次数$n$的增大，其摆动的幅度越来越小，则称数值$p$为事件$A$的统计概率，记为$Pr(A) = p$
+
+  $n$很大时，频率$f_n (A) = m/n$稳定在某一数值$p$的附近摆动，且随着试验次数$n$的增大，其摆动的幅度越来越小，则称$p$为$A$的统计概率，记为$Pr(A) = p$
 
 ]
 === 古典概型
@@ -129,7 +123,7 @@
 === 条件概率
 #definition[条件概率][
 
-  设$A, B$为两事件，$Pr(B)>0$，则事件$B$发生的条件下事件$A$发生的条件概率记为$Pr(A | B)$
+  设$A, B$为两事件，$Pr(B)>0$，则事件$B$发生的条件下事件$A$发生的条件概率为
   $ Pr(A | B) = Pr(A inter B) / Pr(B) $
 ]
 
@@ -173,28 +167,23 @@
 === 随机事件的独立性
 #definition[独立][
 
-  对任意两事件$A, B$满足$Pr(A B) = Pr(A) Pr(B)$，则称$A$与$B$相互独立]
+  $ Pr(A B) = Pr(A) Pr(B) $]
 
 #proposition[][
 
   如果四对事件$A, B; A, overline(B); overline(A), B; overline(A), overline(B)$中其中任何一对事件相互独立，则其余三对事件也分别相互独立]
 
 #definition[相互独立][
-
-  三个事件$A, B, C$相互独立是指下面的关系式同时成立
   $ cases(Pr(A B) = Pr(A) Pr(B), Pr(A C) = Pr(A) Pr(C), Pr(B C) = Pr(B) Pr(C)) $
   $ Pr(A B C) = Pr(A) Pr(B) Pr(C) $
 ]
 
 #definition[两两独立][
 
-  三个事件$A, B, C$两两独立是指下面的关系式成立
   $ cases(Pr(A B) = Pr(A) Pr(B), Pr(A C) = Pr(A) Pr(C), Pr(B C) = Pr(B) Pr(C)) $
 ]
 
 #definition[相互独立][
-
-  $n$个事件$A_1, A_2, dots, A_n$相互独立是指下面的关系式同时成立
   $
              Pr(A_i A_j) & = Pr(A_i) Pr(A_j) \
          Pr(A_i A_j A_k) & = Pr(A_i) Pr(A_j) Pr(A_k) \
@@ -210,7 +199,7 @@
 === 随机事件的条件独立
 #definition[条件独立][
 
-  设$A, B, C$为随机事件，且$Pr(C) > 0$，若
+  $Pr(C) > 0$，若
   $ Pr(A inter B | C) = Pr(A | C) Pr(B | C) $
   则称$A$与$B$在给定$C$下条件独立，记为
   $ A perp B | C $
@@ -268,4 +257,10 @@
 #proposition[二项分布中最可能成功次数][
   - 当$(n+1)p in Z$时，在$k = (n+1)p$与$k=(n+1)p-1$处的概率取得最大值
   - 当$(n+1)p in.not Z$时，在$k = floor((n+1)p)$处的概率取得最大值
+]
+
+
+#definition[Poisson 分布][
+  设随机变量$X$的所有可能取值为$0, 1, 2, dots$，并且分布列为
+  $ Pr(X=k) = e^(- lambda) lambda^k / (k !), k = 0, 1, 2, dots $
 ]
