@@ -13,10 +13,7 @@
 = 随机事件和概率
 == 随机事件及其运算
 === 随机试验和随机事件
-#definition[随机试验][]
-#definition[样本空间与随机事件][]
-#definition[基本事件 复合事件][]
-#definition[必然事件 不可能事件][]
+
 === 随机事件之间的关系和运算
 #definition[随机事件的关系][
 
@@ -210,7 +207,7 @@
 === 随机变量的概念
 #definition[随机变量][
 
-  $X: Omega->RR$为随机变量]
+  $ X: Omega->RR $]
 === 随机变量的分布函数
 #definition[分布函数][
 
@@ -250,7 +247,7 @@
 
   令$X$表示事件$A$发生的次数，则$X$的分布律为
   $ Pr(X=k) = C_n^k p^k (1-p)^(n-k) $
-  称$X tilde B(n,p)$
+  $X tilde B(n,p)$
 ]
 #proposition[二项分布中最可能成功次数][
   - 当$(n+1)p in ZZ$时，在$k = (n+1)p$与$k=(n+1)p-1$处的概率取得最大值
@@ -285,7 +282,7 @@
 
   $lambda > 0$表示一段时间内某随机事件发生次数的期望，一段时间内其发生$k$次的概率
   $ Pr(X=k) = e^(- lambda) lambda^k / (k !), k = 0, 1, 2, dots $
-  称$X tilde P(lambda)$
+  $X tilde P(lambda)$
 ]
 #proposition[随机稀疏化][
 
@@ -294,6 +291,7 @@
 == 连续型随机变量及其概率密度
 === 连续型随机变量的概率密度
 #definition[概率密度函数][
+
   设$X$是一随机变量，$F(x)$为分布函数，若存在非负可积函数$f(x)$，使得
   $ F(x) = integral_(-infinity)^x f(t) d t, - infinity < x < + infinity $
   则$X$是连续型随机变量，$f(x)$为概率密度函数
@@ -321,12 +319,10 @@
 
   $lambda > 0$表示一段时间内某随机事件发生次数的期望，任意两事件的时间间隔为$X$
 
-  概率密度函数为
-  $ f(x) = cases(0 quad x<=0, lambda e^(-lambda x) quad x>0) $
+  $ f(x) = cases(0 quad &x<=0, lambda e^(-lambda x) quad &x>0) $
 
-  累积分布函数为
-  $ F(x) = cases(0 quad x<0, 1 - e^(- lambda x) quad x >= 0) $
-  称$X tilde E(lambda)$
+  $ F(x) = cases(0 quad &x<0, 1 - e^(- lambda x) quad &x >= 0) $
+  $X tilde E(lambda)$
 
 ]
 
@@ -334,3 +330,42 @@
   $ Pr(X > s + t | X > s) = Pr(X > t) $
 ]
 
+#definition[均匀分布][
+  $ f(x) = cases(1/(b-a) quad &a < x < b, 0 &"other") $
+  $X tilde U(a, b)$
+]
+#definition[正态分布][
+  $ f(x) = 1/(sqrt(2 pi) sigma) exp(-(x-mu)^2/(2 sigma^2)), -infinity < x < + infinity $
+  $X tilde N(mu, sigma^2)$
+]
+
+#definition[标准正态分布][
+  $X tilde N(0, 1)$
+
+  概率密度函数记为
+  $ phi(x) = 1/sqrt(2 pi) exp(-x^2 /2) $
+  分布函数记为
+  $ Phi(x) $
+]
+
+#definition[标准正态分布的性质][
+  + 若$X tilde N(mu, sigma^2)$，则$(X-mu)/sigma tilde N(0,1), F(x) = Phi((x-mu)/sigma), f(x) = 1/sigma phi((x-mu)/sigma)$
+  + $Phi(0) = 0.5, Phi(-x) = 1 - Phi(x), Pr(abs(X) < x) = 2 Phi(x) - 1$
+]
+== 随机变量的函数及其分布
+=== 离散型随机变量函数的分布
+#strategy[求$Y = g(X)$的概率分布][
+  $ Pr(Y = y_i) = sum_(k: g(x_k) = y_i) p_k, i=1,2,dots $
+]
+=== 连续型随机变量函数的分布
+#theorem[][
+
+  $g(x)$在$(-infinity, +infinity)$内严格单调，其反函数$x = h(y)$有连续导数，则$Y = g(X)$也是连续型随机变量，且
+  $ f_Y (y) = cases(abs(h^' (y)) f_X (h(y)) quad &alpha < y < beta, 0 quad &"other") $
+  $alpha = min{g(-infinity), g(+infinity)}, beta = max {g(-infinity), g(+infinity)}$
+]
+#theorem[][
+
+  若$g(x)$在不相重叠的区间$I_1, I_2, dots$上逐段严格单调，其反函数分别为$h_1 (y), h_2 (y), dots$， 且均有连续倒数，则$Y = g(X)$也是连续型随机变量，且
+  $ f_Y (y) = abs(h_1^' (y)) f_X (h_1 (y)) + abs(h_2^' (y)) f_X (h_2 (y)) + dots $
+]
