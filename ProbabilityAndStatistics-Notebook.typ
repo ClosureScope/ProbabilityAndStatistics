@@ -223,18 +223,15 @@
 === 离散型随机变量的分布律
 
 #definition[分布律][
-
-  设离散型随机变量$X$的所有可能取值为$X = x_i$，不妨设$x_1 < x_2 < dots$，称
   $ Pr(X = x_i) = Pr({omega: X(omega) = x_i}) = p_i $
-  为随机变量$X$的分布律，也称作概率密度函数
 ]
 #proposition[分布律的性质][
-  + $p_i >= 0$
-  + $sum_(i=1)^infinity p_i = 1$
+  + 非负性：$p_i >= 0$
+  + 规范性：$sum_(i=1)^infinity p_i = 1$
 ]
 #proposition[分布函数与分布律的关系][
-  + $F(x) = Pr(X <= x) = sum_(x_i <= x) Pr(X = x_i)$
-  + 若$x_1 < x_2 < dots$，$Pr(X = x_i) = Pr(x_(i-1) < X <= x_i) = F(x_i) - F(x_(i-1))$
+  + $F(x) = sum_(x_i <= x) Pr(X = x_i)$
+  + $Pr(X = x_i) = F(x_i) - F(x_i -)$
 ]
 === 常见的离散型随机变量
 #definition[0-1分布][
@@ -292,7 +289,7 @@
 === 连续型随机变量的概率密度
 #definition[概率密度函数][
 
-  设$X$是一随机变量，$F(x)$为分布函数，若存在非负可积函数$f(x)$，使得
+  对于$X$的分布函数$F(x)$，若存在非负可积函数$f(x)$，使得
   $ F(x) = integral_(-infinity)^x f(t) d t, - infinity < x < + infinity $
   则$X$是连续型随机变量，$f(x)$为概率密度函数
 ]
@@ -300,12 +297,8 @@
 #proposition[概率密度函数的性质][
   + 非负性：$f(x) >= 0$
   + 规范性：$integral_(-infinity)^(+infinity) f(x) d x = F(+ infinity) = 1$
-  + 若$f(x)$在$x$处连续，$f(x) = F^' (x)$
-  + $Pr(x_0 < X <= x_0 + Delta x) approx f(x_0) Delta x$
-  + $a$是$X$的一个可能取值，$Pr(X = a) = 0$
-  + 对于连续型随机变量$X$
-
-    $Pr(a < X <= b) = Pr(a <= X < b) = Pr(a < X < b) = Pr(a <= X <= b) = integral_a^b f(x) d x$
+  + $Pr(a < X <= b) = Pr(a <= X < b) = Pr(a < X < b) = Pr(a <= X <= b) = integral_a^b f(x) d x$
+  + 在$f(x)$的连续点处，$f(x) = F^' (x)$
 ]
 
 #note[][
@@ -358,14 +351,96 @@
   $ Pr(Y = y_i) = sum_(k: g(x_k) = y_i) p_k, i=1,2,dots $
 ]
 === 连续型随机变量函数的分布
+#intuition[][
+  $ Y = g(X), X = g^(-1) (Y)= h(Y) $
+  $
+    F_Y (y) & = Pr(Y <= y) \
+            & = Pr(g(X) <= y) \
+            & = cases(Pr(X <= h(y)) quad &g arrow.t, Pr(X >= h(y)) quad &g arrow.b) \
+            & = cases(F_X (h(y)) quad &g arrow.t, 1 - F_X (h(y)) quad &g arrow.b)
+  $
+
+  $
+    f_Y (y) & = cases(h^' (y) f_X (h(y)) quad &g arrow.t, -h^' (y) f_X (h(y)) quad &g arrow.b) \
+            & = abs(h^' (y)) f_X (h(y))
+  $
+]
+
 #theorem[][
 
-  $g(x)$在$(-infinity, +infinity)$内严格单调，其反函数$x = h(y)$有连续导数，则$Y = g(X)$也是连续型随机变量，且
-  $ f_Y (y) = cases(abs(h^' (y)) f_X (h(y)) quad &alpha < y < beta, 0 quad &"other") $
-  $alpha = min{g(-infinity), g(+infinity)}, beta = max {g(-infinity), g(+infinity)}$
-]
-#theorem[][
+  $Y = g(X)$，且 $g(x)$ 在 $(-infinity, +infinity)$ 内单调，
 
-  若$g(x)$在不相重叠的区间$I_1, I_2, dots$上逐段严格单调，其反函数分别为$h_1 (y), h_2 (y), dots$， 且均有连续倒数，则$Y = g(X)$也是连续型随机变量，且
-  $ f_Y (y) = abs(h_1^' (y)) f_X (h_1 (y)) + abs(h_2^' (y)) f_X (h_2 (y)) + dots $
+  - $g arrow.t$，定义广义反函数 $h(y) = inf {x: g(x) >= y}$，则
+    $ F_Y (y) = F_X (h(y)) $
+
+  - $g arrow.b$，定义广义反函数 $h(y) = inf {x: g(x) <= y}$，则
+    $ F_Y (y) = 1 - F_X (h(y)) $
+
+
 ]
+
+
+#theorem[概率积分变换][
+
+  设$X$的分布函数为 $F$，且 $F$ 连续，则
+  $ F(X) tilde U(0, 1) $
+]
+
+#theorem[逆变换采样][
+
+  设 $Y tilde U(0, 1)$，$F$ 为任意分布函数，定义其广义反函数（分位数函数）
+  $ F^(-1)(y) = inf {x in RR: F(x) >= y}, quad 0 < y < 1 $
+  则随机变量 $X = F^(-1)(Y)$ 的分布函数为 $F$
+]
+= 多维随机变量及其分布
+== 二维随机变量及其分布
+=== 二维随机变量及其联合分布函数
+#definition[二维随机变量][
+  $ (X, Y): Omega -> RR^2 $
+]
+#definition[联合分布函数][
+  $ F(x, y) = Pr(X<=x, Y<=y) $
+]
+#proposition[联合分布函数的性质][
+  + 非负性：$0 <= F(x, y) <= 1$, $F(+ infinity, + infinity) = 1$, $F(- infinity, - infinity) = 0$, $F(x, - infinity) = 0$, $F(-infinity, y) = 0$
+  + 单调性：$forall x_1 < x_2, F(x_1,y) <= F(x_2,y); forall y_1 < y_2, F(x, y_1) <= F(x, y_2)$
+  + 右连续性：$F(x_0, y_0) = F(x_0 +, y_0); F(x_0, y_0) = F(x_0, y_0+)$
+  + $forall x_1 < x_2, y_1 < y_2, Pr(x_1 < X <= y, y_1 < Y <= y_2) = F(x_2, y_2)- F(x_2, y_1) - F(x_1, y_2) + F(x_1, y_1) >= 0$
+]
+#definition[边缘分布函数][
+  $ F_X (x) = F(x, + infinity), F_Y (y) = F(+infinity, y) $
+]
+=== 二维离散型随机变量
+#definition[联合分布律][
+  $ Pr(X = x_i, Y = y_i) = p_(i j) $
+]
+#proposition[联合分布律的性质][
+  + 非负性：$p_(i j) >= 0$
+  + 规范性：$sum_(i=1)^infinity sum_(j=1)^infinity p_(i j) = 1$
+]
+
+#proposition[联合分布函数与联合分布律的关系][
+  + $F(x, y) = sum_(x_i <= x, y_j <= y) Pr(X = x_i, Y = y_j)$
+  + $Pr(X = x_i, Y = y_j) = F(x_i, y_j) - F(x_i, y_j -) - F(x_i -, y_j) + F(x_i -, y_j -)$
+]
+#definition[边缘分布律][
+  $ Pr(X = x_i) = sum_j p_(i j), Pr(Y = y_j) = sum_i p_(i j) $
+]
+
+=== 二维连续型随机变量
+#definition[联合概率密度函数][
+  对于$(X, Y)$的分布函数$F(x, y)$，若存在二元非负可积函数$f(x, y)$，使得
+  $ F(x,y) = integral_(-infinity)^x integral_(-infinity)^y f(u, v) d u d v $
+  则$(X, Y)$是二维连续型随机变量，并称$f(x, y)$为联合概率密度函数
+]
+
+#proposition[联合概率密度函数的性质][
+  + 非负性：$f(x, y) >= 0$
+  + 规范性：$integral_(-infinity)^(+infinity) integral_(-infinity)^(+infinity) f(x, y)d x d y = 1$
+  + $Pr((X, Y) in G) = integral.double_G f(x,y) d x d y$
+  + 在$f(x, y)$的连续点处，$(partial^2 F(x, y)) / (partial x partial y) = f(x, y)$
+]
+#definition[边缘密度函数][
+  $ f_X (x) = integral_(-infinity)^(+infinity) f(x,y) d y, f_Y (y) = integral_(-infinity)^(+infinity) f(x,y) d x $
+]
+==== 二维均匀分布
