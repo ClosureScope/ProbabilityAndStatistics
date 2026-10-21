@@ -162,7 +162,7 @@
 
 == 随机事件的独立性
 === 随机事件的独立性
-#definition[独立][
+#definition[相互独立][
 
   $ Pr(A B) = Pr(A) Pr(B) $]
 
@@ -424,7 +424,7 @@
   + $Pr(X = x_i, Y = y_j) = F(x_i, y_j) - F(x_i, y_j -) - F(x_i -, y_j) + F(x_i -, y_j -)$
 ]
 #definition[边缘分布律][
-  $ Pr(X = x_i) = sum_j p_(i j), Pr(Y = y_j) = sum_i p_(i j) $
+  $ Pr(X = x_i) = sum_j p_(i j) = p_(i dot), Pr(Y = y_j) = sum_i p_(i j) = p_(dot j) $
 ]
 
 === 二维连续型随机变量
@@ -444,3 +444,83 @@
   $ f_X (x) = integral_(-infinity)^(+infinity) f(x,y) d y, f_Y (y) = integral_(-infinity)^(+infinity) f(x,y) d x $
 ]
 ==== 二维均匀分布
+#definition[二维均匀分布][
+  $ f(x, y) = cases(1/m(G) quad &(x, y) in G, 0 quad &"other") $
+]
+
+#note[][
+  均匀分布的边缘分布不一定是均匀分布，边平行于坐标轴的矩形域上的均匀分布的边缘分布仍为均匀分布。]
+
+#definition[二维正态分布][
+  $ x = mat(x; y), mu = mat(mu_1; mu_2) $
+  $ Sigma = mat(sigma_1^2, rho sigma_1 sigma_2^2; rho sigma_1 sigma_2, sigma_2^2) $
+  $ f(x, y) = 1/(2 pi abs(Sigma)^(1/2)) exp(-1/2 (x - mu)^T Sigma^(-1) (x - mu)) $
+  $(X, Y) tilde N(mu_1, sigma_1^2; mu_2, sigma_2^2; rho)$
+]
+
+#definition[多维正态分布][
+  $ f(x, y) = (2 pi)^(- n /2) abs(Sigma)^(-1/2) exp(-1/2 (x - mu)^T Sigma^(-1) (x - mu)) $
+]
+
+#note[][正态分布的边缘分布是正态分布，边缘分布为正态分布的联合分布不一定是正态分布。]
+
+== 二维随机变量的条件分布
+=== 二维离散型随机变量的条件分布
+#definition[条件分布律][
+  $ Pr(X = x_i | Y = y_j) = Pr(X = x_i, Y = y_j) / Pr(Y = y_j) = p_(i j) / p_(dot j) $
+]
+
+=== 二维连续型随机变量的条件分布
+#definition[条件概率密度函数][
+
+  $ f_(X | Y) (x | y) = f(x, y) / (f_Y (y)) $
+]
+
+#definition[条件分布函数][
+
+  $ F_(X | Y) (x | y) = integral_(- infinity)^x f_(X | Y) (u | y) d u $
+]
+
+#proposition[正态分布的条件分布是正态分布][
+
+  $ Y | X = x tilde N(mu_2 + rho sigma_2 / sigma_1 (x - mu_1), sigma_2^2 (1 - rho^2)) $
+]
+
+== 随机变量的独立性
+#definition[相互独立][
+  $ Pr(X <= x, Y <= y) = Pr(X <= x) Pr(Y <= y) $
+  $ F(x, y) = F_X (x) F_Y (y) $
+]
+
+#proposition[离散型相互独立][
+  $ "独立" <=> Pr(X = x_i, Y = y_j) = Pr(X=x_i) Pr(Y = y_j) $
+]
+
+#proposition[连续型相互独立][
+  $ "独立" <=> f(x, y) = f_X (x) f_Y (y) $
+]
+
+#note[][若相互独立，则边缘分布确定联合分布。]
+
+
+#proposition[][
+
+  $(X, Y) tilde N(mu_1, sigma_1^2; mu_2, sigma_2^2; rho)$
+  $ "独立" <=> rho = 0 $
+]
+
+#theorem[独立性定理][
+
+  $X$与$Y$相互独立的充分必要条件是存在非负可积函数$r(x)$和$g(y)$使得
+  $ f(x, y) = r(x) g(y), -infinity < x < + infinity, -infinity < y < + infinity $
+  在一切连续点上成立。这时
+  $
+    f_X (x) = r(x) / (integral_(-infinity)^(+infinity) r(x) d x), f_Y (y) = g(y) / (integral_(-infinity)^(+infinity) g(y) d y)
+  $
+]
+
+== $n$维随机变量
+#definition[联合分布函数][
+  $ F(x_1, x_2, dots, x_n) = Pr(X_1 <= x_1, X_2 <= x_2, dots, X_n <= x_n) $
+]
+
