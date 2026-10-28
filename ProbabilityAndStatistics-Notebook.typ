@@ -379,6 +379,18 @@
 
 ]
 
+#theorem[][
+
+  $g(x)$在$(-infinity, +infinity)$内严格单调，其反函数$x = h(y)$有连续导数，则$Y = g(X)$也是连续型随机变量，且
+  $ f_Y (y) = cases(abs(h^' (y)) f_X (h(y)) quad &alpha < y < beta, 0 quad &"other") $
+  $alpha = min{g(-infinity), g(+infinity)}, beta = max {g(-infinity), g(+infinity)}$
+]
+
+#theorem[][
+
+  若$g(x)$在不相重叠的区间$I_1, I_2, dots$上逐段严格单调，其反函数分别为$h_1 (y), h_2 (y), dots$， 且均有连续倒数，则$Y = g(X)$也是连续型随机变量，且
+  $ f_Y (y) = abs(h_1^' (y)) f_X (h_1 (y)) + abs(h_2^' (y)) f_X (h_2 (y)) + dots $
+]
 
 #theorem[概率积分变换][
 
@@ -429,7 +441,8 @@
 
 === 二维连续型随机变量
 #definition[联合概率密度函数][
-  对于$(X, Y)$的分布函数$F(x, y)$，若存在二元非负可积函数$f(x, y)$，使得
+
+  若存在二元非负可积函数$f(x, y)$，使得
   $ F(x,y) = integral_(-infinity)^x integral_(-infinity)^y f(u, v) d u d v $
   则$(X, Y)$是二维连续型随机变量，并称$f(x, y)$为联合概率密度函数
 ]
@@ -450,7 +463,7 @@
 
 #note[][
   均匀分布的边缘分布不一定是均匀分布，边平行于坐标轴的矩形域上的均匀分布的边缘分布仍为均匀分布。]
-
+==== 二维正态分布
 #definition[二维正态分布][
   $ x = mat(x; y), mu = mat(mu_1; mu_2) $
   $ Sigma = mat(sigma_1^2, rho sigma_1 sigma_2^2; rho sigma_1 sigma_2, sigma_2^2) $
@@ -524,3 +537,107 @@
   $ F(x_1, x_2, dots, x_n) = Pr(X_1 <= x_1, X_2 <= x_2, dots, X_n <= x_n) $
 ]
 
+#definition[边缘分布函数][
+  $ F_(X_i) = Pr(X_i <= x_i) = Pr(X_1 <= +infinity, dots, X_i <= x_i, dots, X_n <= +infinity,) $
+]
+
+#definition[相互独立][
+  $ Pr(X_1 <= x_1, X_2 <= x_2, dots, X_n <= x_n) = product_(i=1)^n Pr(X_i <= x_i) $
+]
+
+#definition[联合分布律][
+  $ Pr(X_1 = x_1, X_2 = x_2, dots, X_n = x_n) $
+]
+
+#definition[联合概率密度函数][
+
+  若存在非负可积函数$f(x_1, x_2, dots, x_n)$，使得
+  $
+    F(x_1, x_2, dots, x_n) = integral_(-infinity)^(x_1) integral_(-infinity)^(x_2) dots integral_(-infinity)^(x_n) f(u_1, u_2, dots, u_n) d u_1 d u_2 dots d u_n
+  $
+  则$(X_1, X_2, dots, X_n)$是$n$维连续型随机变量，并称$f(x_1, x_2, dots, x_n)$为联合概率密度函数
+]
+
+#proposition[离散型相互独立][
+  $ "独立" <=> Pr(X_1 = x_1, X_2 = x_2, dots, X_n = x_n) = Pr(X_1 = x_1) dots Pr(X_n = x_n) $
+]
+
+#proposition[连续型相互独立][
+  $ "独立" <=> f(x_1, x_2, dots, x_n) = f_(X_1) (x_1) f_(X_2) (x_2) dots f_(X_n) (x_n) $
+
+]
+
+== 二维随机变量函数的分布
+=== 二维离散型随机变量函数的分布
+#proposition[和的分布][卷积公式][
+
+  $Z = X + Y$，$X, Y$相互独立
+  $ Pr(Z = r) = sum_(i=0)^r Pr(X = i) Pr(Y = r - i) $
+]
+
+#proposition[二项分布的可加性][
+
+  $X_1, X_2, dots, X_m$相互独立且$X_i tilde B(n_i, p)$，则$ sum_i X_i tilde B(sum_i n_i, p) $
+]
+
+#proposition[Poisson分布的可加性][
+
+  $X_1, X_2, dots, X_m$相互独立且$X_i tilde P(lambda_i)$，则$ sum_i X_i tilde P(sum_i lambda_i) $
+]
+=== 二维连续型随机变量函数的分布
+
+
+#proposition[和的分布][卷积公式][
+
+  $Z = X + Y$
+  $ f_Z (z) = integral_(-infinity)^(+infinity) f(x, z - x) d x = integral_(-infinity)^(+infinity) f(z - y, y) d y $
+  若$X, Y$相互独立
+  $
+    f_Z (z) & = (f_X star f_Y)(z)
+  $
+  #definition[卷积][
+    $ (f star g) (x) = integral_(-infinity)^(+infinity) f(t) g(x - t) d t $
+  ]
+  一般地，$Z = a X + b Y + c$
+  $
+    f_Z (z) = 1/abs(b) integral_(-infinity)^(+infinity) f(x, (z - a x - c) / b) d x = 1/abs(a) integral_(-infinity)^(+infinity) f((z-b y - c) / a, y) d y
+  $
+]
+
+#proposition[商的分布][
+  $Z = X / Y$
+  $ f_Z (z) = integral_(-infinity)^(+infinity) f(z y, y) abs(y) d y $
+  若$X, Y$相互独立
+  $ f_Z (z) = integral_(-infinity)^(+infinity) f_X (z y) f_Y (y) abs(y) d y $
+]
+
+#proposition[极值的分布][
+
+  $X_1, X_2, dots, X_n$相互独立
+
+  $M = max_i X_i$
+
+  $N = min_i X_i$
+  $ F_M (m) = product_i F_X_i (m) $
+  $ F_N (n) = 1 - product_i (1 - F_X_i (n)) $
+
+]
+
+#proposition[二维正态分布的性质][
+  + $(X, Y) tilde N(mu_1, sigma_1^2; mu_2, sigma_2^2; rho) => X tilde N(mu_1, sigma_1^2), Y tilde N(mu_2, sigma_2^2)$
+  + $(X, Y) tilde N(mu_1, sigma_1^2; mu_2, sigma_2^2; rho) <=> X tilde N(mu_1, sigma_1^2), Y | X = x tilde N(mu_2 + rho sigma_2 / sigma_1 (x - mu_1), sigma_2^2 (1- rho^2))$
+  + $(X, Y) tilde N(mu_1, sigma_1^2; mu_2, sigma_2^2; rho) => X + Y tilde N(mu_1 + mu_2, sigma_1^2 + 2 rho sigma_1 sigma_2 + sigma_2^2)$
+]
+
+#proposition[正态分布的可加性][
+
+  $X_1, X_2, dots, X_m$相互独立且$X_i tilde N(mu_i, sigma_i^2)$，则$ sum_i X_i tilde N(sum_i mu_i, sum_i sigma_i^2) $
+]
+=== 一般情形的多维随机变量函数分布
+#theorem[][
+
+  $X, Y$为多维随机变量，若$y = g(x)$存在唯一的反函数使得$x = h(y)$，$Y = g(X)$
+
+  $ f_Y (y) = f_X (h(y)) abs(det (partial x) / (partial y)) $
+
+]
