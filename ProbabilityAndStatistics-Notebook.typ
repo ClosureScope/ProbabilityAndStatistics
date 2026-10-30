@@ -589,26 +589,13 @@
 
 #proposition[和的分布][卷积公式][
 
-  $Z = X + Y$
-  $ f_Z (z) = integral_(-infinity)^(+infinity) f(x, z - x) d x = integral_(-infinity)^(+infinity) f(z - y, y) d y $
-  若$X, Y$相互独立
+  $Z = X + Y$，$X, Y$相互独立
   $
-    f_Z (z) & = (f_X star f_Y)(z)
+    f_Z (z) & = (f_X star f_Y)(z) = integral_(-infinity)^(+infinity) f(x, z - x) d x
   $
   #definition[卷积][
     $ (f star g) (x) = integral_(-infinity)^(+infinity) f(t) g(x - t) d t $
   ]
-  一般地，$Z = a X + b Y + c$
-  $
-    f_Z (z) = 1/abs(b) integral_(-infinity)^(+infinity) f(x, (z - a x - c) / b) d x = 1/abs(a) integral_(-infinity)^(+infinity) f((z-b y - c) / a, y) d y
-  $
-]
-
-#proposition[商的分布][
-  $Z = X / Y$
-  $ f_Z (z) = integral_(-infinity)^(+infinity) f(z y, y) abs(y) d y $
-  若$X, Y$相互独立
-  $ f_Z (z) = integral_(-infinity)^(+infinity) f_X (z y) f_Y (y) abs(y) d y $
 ]
 
 #proposition[极值的分布][
@@ -638,6 +625,60 @@
 
   $X, Y$为多维随机变量，若$y = g(x)$存在唯一的反函数使得$x = h(y)$，$Y = g(X)$
 
-  $ f_Y (y) = f_X (h(y)) abs(det (partial x) / (partial y)) $
+  $ f_Y (y) = f_X (h(y)) abs((partial x) / (partial y)) $
 
+]
+#proposition[][
+
+  $Z = g(X, Y)$
+
+  $Y = h(X, Z)$
+
+  $ f_Z (z) = integral_(-infinity)^(+infinity) f(x, h(x, z)) abs((partial h) / (partial z)) d x $
+]
+= 随机变量的数字特征
+== 期望
+=== 期望的概念
+#definition[离散型随机变量的期望][
+
+  若$sum_(k=1)^infinity x_k p_k$绝对收敛，
+  $ EE(X) = sum_(k=1)^infinity x_k p_k $
+]
+#definition[连续型随机变量的期望][
+
+  若$integral_(-infinity)^(+infinity) x f(x) d x$绝对收敛，
+  $ EE(X) = integral_(-infinity)^(+infinity) x f(x) d x $
+]
+#proposition[常见分布的期望][
+  + $X tilde B(n, p), EE(X) = n p$
+  + $X$服从几何分布，$EE(X) = 1/p$
+  + $X tilde P(lambda), EE(X) = lambda$
+  + $X tilde E(lambda), EE(X) = 1/lambda$
+  + $X tilde N(mu, sigma^2), EE(X) = mu$
+]
+=== 期望的性质
+#proposition[期望的性质][
+  + $EE(X)$存在的充要条件是$EE(abs(X)) < infinity$
+  + $X <= Y => EE(X) <= EE(Y)$
+  + $EE(c) = c$
+  + $EE(c X) = c EE(X)$
+  + $EE(X + Y) = EE(X) + EE(Y)$
+  + $X, Y$独立，$EE(X Y) = EE(X) EE(Y)$
+]
+#proposition[期望与尾部的关系][层饼公式][
+
+  $X$是非负离散型随机变量，可能取值为$0, 1, 2, dots$，
+  $ EE(X) = sum_(i=0)^(infinity) Pr(X > i) $
+
+  $X$是非负连续型随机变量，
+  $ EE(X) = integral_0^infinity Pr(X > x) d x $
+]
+=== 随机变量函数的期望
+#proposition[随机变量函数的期望][
+  $ EE(Y) = EE(g(X)) = sum_(k=1)^infinity g(x_k) p_k $
+  $ EE(Y) = EE(g(X)) = integral_(-infinity)^(+infinity) g(x) f(x) d x $
+]
+#corollary[][
+  $ EE(Z) = EE(g(X, Y)) = sum_(i=1)^infinity sum_(j=1)^infinity g(x_i, y_i) p_(i j) $
+  $ EE(Z) = EE(g(X, Y)) = integral_(-infinity)^(+infinity) integral_(-infinity)^(+infinity) g(x, y) f(x, y) d x d y $
 ]
