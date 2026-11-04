@@ -639,23 +639,15 @@
 = 随机变量的数字特征
 == 期望
 === 期望的概念
-#definition[离散型随机变量的期望][
+#definition[期望][
 
   若$sum_(k=1)^infinity x_k p_k$绝对收敛，
   $ EE(X) = sum_(k=1)^infinity x_k p_k $
-]
-#definition[连续型随机变量的期望][
 
   若$integral_(-infinity)^(+infinity) x f(x) d x$绝对收敛，
   $ EE(X) = integral_(-infinity)^(+infinity) x f(x) d x $
 ]
-#proposition[常见分布的期望][
-  + $X tilde B(n, p), EE(X) = n p$
-  + $X$服从几何分布，$EE(X) = 1/p$
-  + $X tilde P(lambda), EE(X) = lambda$
-  + $X tilde E(lambda), EE(X) = 1/lambda$
-  + $X tilde N(mu, sigma^2), EE(X) = mu$
-]
+
 === 期望的性质
 #proposition[期望的性质][
   + $EE(X)$存在的充要条件是$EE(abs(X)) < infinity$
@@ -681,4 +673,33 @@
 #corollary[][
   $ EE(Z) = EE(g(X, Y)) = sum_(i=1)^infinity sum_(j=1)^infinity g(x_i, y_i) p_(i j) $
   $ EE(Z) = EE(g(X, Y)) = integral_(-infinity)^(+infinity) integral_(-infinity)^(+infinity) g(x, y) f(x, y) d x d y $
+]
+== 方差
+=== 方差的概念
+#definition[方差][
+  $ D(X) = EE((X - EE(X))^2) = EE(X^2) - (EE(X))^2 $
+  $ sigma_X = sqrt(D(X)) $
+]
+=== 方差的性质
+#proposition[方差的性质][
+  + $D(X)$存在的充要条件是$EE(abs(X)^2) < +infinity$
+  + $D(c) = 0$
+  + $D(c X) = c^2 D(X)$
+  + $X, Y$独立，$D(X plus.minus Y) = D(X) + D(Y)$
+  + $D(X) <= EE((X - c)^2)$ 等号成立当且仅当$c = EE(X)$
+  + $D(X) = 0 <=> exists c, P(X = c) = 1$
+]
+=== 标准化随机变量
+#definition[标准化随机变量][
+  $ X^* = (X - EE(X)) / sqrt(D(X)) $
+  $E(X^*) = 0, D(X^*) = 1$
+]
+== 重要随机变量的期望和方差
+#proposition[重要随机变量的期望和方差][
+  + $X tilde B(n, p), EE(X) = n p， D(X) = n p (1-p)$
+  + $X tilde "Geom"(p), EE(X) = 1/p, D(X) = (1-p) / p^2$
+  + $X tilde P(lambda), EE(X) = lambda, D(X) = lambda$
+  + $X tilde E(lambda), EE(X) = 1/lambda, D(X) = 1/lambda^2$
+  + $X tilde N(mu, sigma^2), EE(X) = mu, D(X) = sigma^2$
+  + $X tilde U(a, b), EE(X) = (a + b) / 2, D(X) = (b-a)^2/12$
 ]
