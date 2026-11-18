@@ -656,6 +656,7 @@
   + $EE(c X) = c EE(X)$
   + $EE(X + Y) = EE(X) + EE(Y)$
   + $X, Y$独立，$EE(X Y) = EE(X) EE(Y)$
+  + $EE(X Y) = EE(X) EE(Y) + "cov"(X, Y)$
 ]
 #proposition[期望与尾部的关系][层饼公式][
 
@@ -691,8 +692,8 @@
 ]
 === 标准化随机变量
 #definition[标准化随机变量][
-  $ X^* = (X - EE(X)) / sqrt(D(X)) $
-  $E(X^*) = 0, D(X^*) = 1$
+  $ X^star = (X - EE(X)) / sqrt(D(X)) $
+  $E(X^star) = 0, D(X^star) = 1$
 ]
 == 重要随机变量的期望和方差
 #proposition[重要随机变量的期望和方差][
@@ -703,3 +704,145 @@
   + $X tilde N(mu, sigma^2), EE(X) = mu, D(X) = sigma^2$
   + $X tilde U(a, b), EE(X) = (a + b) / 2, D(X) = (b-a)^2/12$
 ]
+== 协方差和相关系数
+=== 协方差和相关系数的概念
+#definition[协方差][
+  $ "cov"(X, Y) = EE((X-EE(X))(Y - EE(Y))) = EE(X Y) - EE(X) EE(Y) $
+]
+
+#definition[Pearson 相关系数][
+  $ rho_(X Y) = "cov"(X, Y)/(sqrt(D(X)) sqrt(D(Y))) = "cov"(X^star, Y^star) $
+  $rho_(X Y)=0$，$X$与$Y$不相关
+
+  $abs(rho_(X Y))=1$，$X$与$Y$完全相关
+
+  $abs(rho_(X Y))<1$，$X$与$Y$部分线性相关
+]
+=== 协方差和相关系数的性质
+#proposition[协方差的性质][
+  + $D(X) = "cov"(X, X)$
+  + $D(X plus.minus Y) = D(X) + D(Y) plus.minus 2"cov"(X, Y)$
+  + $"cov"(X, Y) = "cov"(Y, X)$
+  + $"cov"(a X + c, b Y + d) = a b"cov"(X, Y)$
+  + $"cov"(X + Y, Z) = "cov"(X, Z) + "cov"(Y, Z)$
+  + Cauchy-Schwarz不等式：$"cov"(X, Y) <= sqrt(D(X)) sqrt(D(Y))$
+]
+#proposition[相关系数的性质][
+  + $abs(rho_(X Y)) <= 1$
+  + $abs(rho_(X Y)) = 1 <=> Pr(Y^star = plus.minus X^*) = 1$
+]
+#proposition[][独立一定不相关，不相关未必独立]
+== 条件期望
+#definition[条件期望][
+  #definition[给定随机事件的条件期望][
+    $ EE(X | A) = sum_(k=1)^infinity x_k Pr(X = x_k | A) $
+  ]
+  #definition[给定随机变量的条件期望][
+    $ EE(X | Y) = g(Y) = "argmin"_g EE_X ((X - g(Y))^2) $
+  ]
+]
+#proposition[条件期望的性质][
+  + $EE(X | X) = X$
+  + $X, Y$相互独立，$EE(X | Y) = EE(X)$
+  + $EE(a X + b Y | Z) = a EE(X | Z) + b EE(Y | Z)$
+]
+#theorem[重期望公式][
+  $ EE(X) = EE(EE(X | Y)) $
+]
+== 随机变量的高阶矩
+#definition[随机变量的高阶矩][
+  + $EE(X^k)$为$X$的$k$阶原点矩，$EE((X - EE(X))^k)$为$X$的$k$阶中心矩
+  + $EE(X^k Y^l)$为$X$和$Y$的$k+l$阶混合原点矩，$EE((X - EE(X))^k (Y - EE(Y))^l)$为$X$和$Y$的$k+l$阶混合中心矩
+]
+
+
+#definition[分位数][
+
+  满足分布函数$F(tau_p) = p$的$tau_p$称为$p$分位数
+]
+== 多维随机向量
+#definition[期望][
+  $ EE(X) = mu_X = mat(EE(X_1); EE(X_2); dots.v; EE(X_p)) $
+]
+
+#definition[协方差矩阵][
+
+  $sigma_(i j) = "cov"(X_i, X_j)$
+  $
+    "cov"(X) = Sigma_X = mat(sigma_11, sigma_12, dots, sigma_(1 p); sigma_21, sigma_22, dots, sigma_(2 p); dots.v, dots.v, dots.v, dots.v; sigma_(p 1), sigma_(p 2), dots, sigma_(p p)) &= EE((X - mu_X) (X - mu_X)^T) \ &= EE(X X^T) -mu_X mu_X^T
+  $
+]
+#definition[交叉协方差矩阵][
+
+  $sigma_(i j) = "cov"(X_i, Y_j)$
+  $
+    "cov"(X, Y) = Sigma_(X Y) = mat(sigma_11, sigma_12, dots, sigma_(1 q); sigma_21, sigma_22, dots, sigma_(2 q); dots.v, dots.v, dots.v, dots.v; sigma_(p 1), sigma_(p 2), dots, sigma_(p q)) &= EE((X - mu_X) (Y - mu_Y)^T) \ &= EE(X Y^T) - mu_X mu_Y^T
+  $
+]
+
+#proposition[期望的性质][
+  + $EE(A X + B Y + b) = A mu_X + B mu_Y + b$
+  + $EE(X Y^T) = mu_X mu_Y^T + Sigma_(X Y)$
+  + $EE(X^T Y) = mu_X^T mu_Y + "tr"(Sigma_(X Y))$
+]
+
+#proposition[协方差矩阵的性质][
+  + $Sigma_X = Sigma_X^T$
+  + $Sigma_X succ.eq 0$
+  + $"cov"(A X + b) = A Sigma_X A^T$
+  + $"cov"(X + Y) = Sigma_X + Sigma_Y + Sigma_(X Y) + Sigma_(X Y)^T$
+]
+
+#proposition[交叉协方差矩阵的性质][
+  + $Sigma_(X Y) = Sigma_(Y X)^T$
+  + $"cov"(A X + a, B Y + b) = A Sigma_(X Y) B^T$
+  + $"cov"(X + Y, Z) = "cov"(X, Z) + "cov"(Y, Z)$
+  + $X bot Y => Sigma_(X Y) = 0$
+  + $X, Y " jointly normal" => (Sigma_(X Y) = 0 <==> X bot Y)$
+]
+
+= 大数定律与中心极限定理
+== 预备知识
+#definition[集中不等式][
+  $ Pr(abs(X - mu) >= epsilon) <= phi(epsilon) $
+]
+#theorem[马尔可夫不等式][
+
+  $X$为非负随机变量，且期望有限，$forall epsilon > 0$
+  $ Pr(X >= epsilon) <= EE(X) / epsilon $
+]
+=== Chebyshev 不等式
+#theorem[Chebyshev 不等式][
+  $ Pr(abs(X - mu) >= epsilon) <= sigma^2 / epsilon^2 $
+]
+=== 依概率收敛
+#definition[依概率收敛][
+  $ lim_(n->infinity) Pr(abs(X_n - X) >= epsilon) = 0 $
+  $ X_n ->^Pr X $
+]
+#definition[几乎处处收敛][
+  $ Pr(lim_(n->infinity) X_n = X) = 1 $
+  $ X_n ->^("a.s.") X $
+]
+#definition[$r$阶矩收敛][
+  $ lim_(n->infinity) EE(abs(X_n - X)^r) = 0 $
+  $ X_n ->^(L^r) X $
+]
+#definition[依分布收敛][
+  $ lim_(n->infinity) F_n (x) = F(x) $
+  $ X_n ->^(d) X $
+]
+#proposition[][
+  $ X_n ->^("a.s.") X => X_n ->^Pr X => X_n ->^(d) X $
+  $ X_n ->^(L^r) X => X_n ->^Pr X $
+]
+== 大数定律
+#theorem[Bernoulli 大数定律][
+
+  对于$n$次Bernoulli 试验，频数$n_A / n$依概率收敛到概率$p$
+  $ lim_(n->infinity) Pr(abs(n_A / n - p) < epsilon) = 1 $
+]
+#definition[大数定律][
+  $ lim_(n->infinity) Pr(abs(1/n sum_(i=1)^n X_i - 1/n sum_(i=1)^n EE(X_i)) < epsilon) = 1 $
+]
+== 中心极限定理
