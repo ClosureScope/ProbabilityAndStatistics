@@ -837,12 +837,38 @@
   $ X_n ->^(L^r) X => X_n ->^Pr X $
 ]
 == 大数定律
+#definition[大数定律][
+  $ lim_(n->infinity) Pr(abs(1/n sum_(i=1)^n X_i - 1/n sum_(i=1)^n EE(X_i)) < epsilon) = 1 $
+]
 #theorem[Bernoulli 大数定律][
 
   对于$n$次Bernoulli 试验，频数$n_A / n$依概率收敛到概率$p$
   $ lim_(n->infinity) Pr(abs(n_A / n - p) < epsilon) = 1 $
 ]
-#definition[大数定律][
-  $ lim_(n->infinity) Pr(abs(1/n sum_(i=1)^n X_i - 1/n sum_(i=1)^n EE(X_i)) < epsilon) = 1 $
+#theorem[Chebyshev 大数定律][
+
+  $X_1, X_2, dots$两两不相关，方差存在，且有共同的上界，即
+  $ rho_(X_i X_j) = 0, i != j; D(X_i) = sigma_i^2 <= c $
+  记$EE(X_i) = mu_i$，则该序列服从大数定律
+  $ lim_(n->infinity) Pr(abs(1/n sum_(i=1)^n X_i - 1/n sum_(i=1)^n mu_i) < epsilon) = 1 $
+]
+#theorem[Khintchine 大数定律][
+
+  $X_1, X_2, dots$为独立同分布，且期望存在，$EE(X_k) = mu$，则该序列服从大数定律
+  $ lim_(n->infinity) Pr(abs(1/n sum_(i=1)^n X_i - mu) < epsilon) = 1 $
 ]
 == 中心极限定理
+#theorem[De Moivre-Laplace 中心极限定理][
+
+  $Y_n tilde B(n, p)$，令
+  $ Y_n^star = (Y_n - n p ) / sqrt(n p (1-p)) $
+  则$Y_n^star$依分布收敛到标准正态分布
+  $ lim_(n->infinity) Pr(Y_n^star <= y) = Phi(y) $
+]
+#theorem[Lindeberg-Levy 中心极限定理][
+
+  $X_1, X_2, dots$独立同分布，期望和方差都存在，$EE(X_k) = mu, D(X_k) = sigma^2$，令
+  $ (sum_(k=1)^n X_k)^star = (sum_(k=1)^n X_k - n mu) / (sqrt(n) sigma) $
+  则$(sum_(k=1)^n X_k)^star$依分布收敛到标准正态分布
+  $ lim_(n->infinity) Pr((sum_(k=1)^n X_k)^star <= x) = Phi(x) $
+]
